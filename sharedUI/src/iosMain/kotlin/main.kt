@@ -7,8 +7,10 @@ import platform.UIKit.UIStatusBarStyleDarkContent
 import platform.UIKit.UIStatusBarStyleLightContent
 import platform.UIKit.UIViewController
 import platform.UIKit.setStatusBarStyle
+import ru.vlyashuk.shopvl.di.initKoin
 
-fun MainViewController(): UIViewController = ComposeUIViewController { 
+fun MainViewController(): UIViewController = ComposeUIViewController {
+    initKoin()
     App(onThemeChanged = { ThemeChanged(it) })
 }
 
