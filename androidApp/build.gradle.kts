@@ -16,7 +16,7 @@ android {
 
         applicationId = "ru.vlyashuk.shopvl.androidApp"
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = "1.0.1"
     }
 
     compileOptions {
@@ -32,4 +32,5 @@ kotlin {
 dependencies {
     implementation(project(":sharedUI"))
     implementation(libs.androidx.activityCompose)
+    implementation(libs.koin.android)
 }
