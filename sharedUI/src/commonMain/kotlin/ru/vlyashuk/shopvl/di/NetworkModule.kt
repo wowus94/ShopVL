@@ -1,6 +1,7 @@
 package ru.vlyashuk.shopvl.di
 
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
@@ -15,9 +16,9 @@ val networkModule = module {
             isLenient = true
         }
     }
-    
+
     single<HttpClient> {
-        HttpClient(get()) {
+        HttpClient(get<HttpClientEngine>()) {
             install(ContentNegotiation) {
                 json(get<Json>())
             }
