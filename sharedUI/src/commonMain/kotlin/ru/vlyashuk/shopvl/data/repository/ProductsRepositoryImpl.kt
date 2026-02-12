@@ -1,5 +1,7 @@
 package ru.vlyashuk.shopvl.data.repository
 
+import io.ktor.client.network.sockets.SocketTimeoutException
+import kotlinx.io.IOException
 import ru.vlyashuk.shopvl.data.datasource.remote.ProductsApiService
 import ru.vlyashuk.shopvl.data.mapper.ProductMapper
 import ru.vlyashuk.shopvl.domain.DomainError
@@ -11,13 +13,15 @@ class ProductsRepositoryImpl(
 ) : ProductsRepository {
 
     override suspend fun getProducts(): List<Product> {
-        return try {
-            val response = productsApiService.getProducts().getOrElse { throw DomainError.Network }
-            ProductMapper.mapToDomain(response.products)
-        } catch (e: DomainError) {
-            throw e
-        } catch (e: Exception) {
-            throw DomainError.Unknown
-        }
+        val response = productsApiService.getProducts()
+            .getOrElse { exception ->
+                when (exception) {
+                    is SocketTimeoutException,
+                    is IOException -> throw DomainError.Network
+                    else -> throw DomainError.Unknown
+                }
+            }
+
+        return ProductMapper.mapToDomain(response.products)
     }
 }

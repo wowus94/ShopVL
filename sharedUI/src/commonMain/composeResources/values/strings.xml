@@ -1,3 +1,7 @@
 <resources>
-    <string name="hello_world">Hello World!</string>
+    <string name="not_connection">Отсутствует подключение к интернету</string>
+    <string name="not_products">Товары не найдены</string>
+    <string name="error">Произошла ошибка: </string>
+    <string name="unknow_error">Неизвестная ошибка</string>
+    <string name="retry">Повторить</string>
 </resources>

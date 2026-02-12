@@ -16,7 +16,7 @@ android {
 
         applicationId = "ru.vlyashuk.shopvl.androidApp"
         versionCode = 1
-        versionName = "1.0.3"
+        versionName = "1.0.4"
     }
 
     compileOptions {
