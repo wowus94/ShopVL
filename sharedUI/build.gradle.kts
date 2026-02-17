@@ -16,7 +16,6 @@ plugins {
 kotlin {
     androidTarget() //We need the deprecated target to have working previews
 
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
@@ -37,7 +36,7 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime)
-            implementation(libs.compose.nav3)
+            implementation(libs.androidx.navigation.compose)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
@@ -49,6 +48,7 @@ kotlin {
             implementation(libs.apollo.runtime)
             implementation(libs.kstore)
             implementation(libs.materialKolor)
+            implementation(libs.material.icons.extended)
         }
 
         commonTest.dependencies {
