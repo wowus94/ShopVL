@@ -8,6 +8,6 @@
 - Koin
 - Coroutines
 - Multiplatform Settings
-- AndroidX Navigation 3
+- AndroidX Navigation 2
 - Coil
 
