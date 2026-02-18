@@ -23,9 +23,20 @@ class ProductsViewModel(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
-    fun loadProducts() {
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
+    fun loadProducts(forceRefresh: Boolean = false) {
+        if (!forceRefresh && _products.value.isNotEmpty()) {
+            return
+        }
+
         viewModelScope.launch {
-            _isLoading.value = true
+            if (forceRefresh) {
+                _isRefreshing.value = true
+            } else {
+                _isLoading.value = true
+            }
             _error.value = null
 
             getProductsUseCase()
@@ -49,10 +60,12 @@ class ProductsViewModel(
                 }
 
             _isLoading.value = false
+            _isRefreshing.value = false
         }
     }
 
     fun retry() {
-        loadProducts()
+        _error.value = null
+        loadProducts(forceRefresh = true)
     }
 }

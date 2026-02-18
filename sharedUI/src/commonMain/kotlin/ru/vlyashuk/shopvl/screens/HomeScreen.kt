@@ -14,6 +14,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -38,6 +40,9 @@ fun HomeScreen(
     val products by productsViewModel.products.collectAsState()
     val isLoading by productsViewModel.isLoading.collectAsState()
     val error by productsViewModel.error.collectAsState()
+    val isRefreshing by productsViewModel.isRefreshing.collectAsState()
+
+    val pullToRefreshState = rememberPullToRefreshState()
 
     LaunchedEffect(Unit) {
         productsViewModel.loadProducts()
@@ -54,11 +59,10 @@ fun HomeScreen(
                 CircularProgressIndicator(modifier = Modifier.padding(32.dp))
             }
 
-            error != null -> {
+            error != null && !isRefreshing -> {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
                     Text(
                         text = error ?: stringResource(Res.string.unknow_error),
                         color = MaterialTheme.colorScheme.error,
@@ -77,12 +81,21 @@ fun HomeScreen(
 
             else -> {
 
-                LazyColumn(
+                PullToRefreshBox(
+                    isRefreshing = isRefreshing,
+                    onRefresh = { productsViewModel.loadProducts(forceRefresh = true) },
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    state = pullToRefreshState
                 ) {
-                    items(products) { product ->
-                        ProductCard(product = product)
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(products) { product ->
+                            ProductCard(product = product)
+                        }
                     }
                 }
             }
