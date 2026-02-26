@@ -1,0 +1,13 @@
+<resources>
+    <string name="not_connection">Not Internet connection</string>
+    <string name="not_products">Product not find</string>
+    <string name="error">Error: </string>
+    <string name="unknow_error">Unknow error </string>
+    <string name="retry">Retry</string>
+    <string name="home">Main</string>
+    <string name="catalog">Catalog</string>
+    <string name="cart">Cart</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
+    <string name="language">Language app</string>
+</resources>

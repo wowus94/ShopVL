@@ -12,6 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.stringResource
+import shopvl.sharedui.generated.resources.Res
+import shopvl.sharedui.generated.resources.catalog
 
 @Composable
 fun CatalogScreen() {
@@ -24,7 +27,7 @@ fun CatalogScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Каталог",
+            text = stringResource(Res.string.catalog),
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 16.dp)
         )
