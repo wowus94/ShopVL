@@ -49,6 +49,8 @@ kotlin {
             implementation(libs.kstore)
             implementation(libs.materialKolor)
             implementation(libs.material.icons.extended)
+            implementation(libs.settings)
+            implementation(libs.settings.coroutines)
         }
 
         commonTest.dependencies {

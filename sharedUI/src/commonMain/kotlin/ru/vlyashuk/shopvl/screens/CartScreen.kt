@@ -11,8 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.stringResource
+import shopvl.sharedui.generated.resources.Res
+import shopvl.sharedui.generated.resources.cart
 
 @Composable
 fun CartScreen() {
@@ -25,7 +27,7 @@ fun CartScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Корзина",
+            text = stringResource(Res.string.cart),
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 16.dp)
         )
